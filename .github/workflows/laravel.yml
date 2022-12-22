@@ -14,6 +14,8 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v3
+      with:
+        clean: false
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
@@ -30,3 +32,5 @@ jobs:
         DB_USERNAME: ${{secrets.DB_USERNAME}}
         DB_PASSWORD: ${{secrets.DB_PASSWORD}}
       run: php artisan migrate
+    - name: Clean Cache
+      run: php artisan optimize:clear && php artisan route:cache && php artisan config:cache
