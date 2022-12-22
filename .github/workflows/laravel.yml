@@ -26,6 +26,8 @@ jobs:
       run: sudo chmod -R 777 storage bootstrap/cache
     - name: Run migrations
       env:
+        APP_ENV: local
+        APP_DEBUG: true
         DB_HOST: ${{secrets.DB_HOST}}
         DB_CONNECTION: ${{secrets.DB_CONNECTION}}
         DB_DATABASE: ${{secrets.DB_DATABASE}}
